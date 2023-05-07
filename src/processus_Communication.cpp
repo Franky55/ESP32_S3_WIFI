@@ -10,6 +10,7 @@
 // if udp:         https://gist.github.com/santolucito/70ecb94ce297eb1b8b8034f78683447b
 
 
+
 void Processus_Communication_ConnexionClient();
 void Processus_Communication_Check_State();
 void Processus_Communication_Read();
@@ -38,15 +39,17 @@ void Processus_Communication_ConnexionClient()
     
     if(interface_WIFI_Connexion() == 0)
     {
-        Serial.println("NOPE");
+        //Serial.println("NOPE");
         processus_WIFI.State = 0;
         return;
     }
     Serial.println("YES");
-    interface_NEOPIXEL_allume(0, 100, 0);
+    //interface_NEOPIXEL_allume(0, 100, 0);
+    interface_WIFI_Show_Page();
     processus_WIFI.State = 1;
+ 
     //Send hand shake and all my data
-    serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Read;
+    serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Check_State;
 
 }
 
@@ -55,7 +58,8 @@ void Processus_Communication_Check_State()
 {
     if(!interface_WIFI_Check_Connexion())
     {
-        interface_NEOPIXEL_allume(100, 0, 0);
+ 
+        //interface_NEOPIXEL_allume(100, 0, 0);
         processus_WIFI.State = 0;
         processus_WIFI.DataRead = 0;
         processus_WIFI.DataToSend = 0;
@@ -67,6 +71,8 @@ void Processus_Communication_Check_State()
 
     if(interface_WIFI_Data_Available())
     {
+
+        Serial.println("Data available");
         processus_WIFI.DataRead = 1;
         serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Read;
         return;
@@ -86,10 +92,26 @@ void Processus_Communication_Read()
 {
 
     unsigned char c = interface_WIFI_Read();
+    Serial.print("Data: ");
+    Serial.println(c);
 
-    
+  
 
+   
+
+    if(c == '1')
+    {
+        interface_NEOPIXEL_allume(10,10,10);
+        //interface_WIFI_eteint();
+    }
+    if(c == '0')
+    {
+        interface_NEOPIXEL_eteint();
+        //interface_WIFI_eteint();
+    }
+    interface_WIFI_eteint();
     processus_WIFI.DataRead = 0;//data has been read
+    serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Check_State;
 
 }
 
@@ -97,5 +119,6 @@ void Processus_Communication_Read()
 void Processus_Communication_Send()
 {
     processus_WIFI.DataToSend = 0;//data has been sent
+    serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Check_State;
 
 }
