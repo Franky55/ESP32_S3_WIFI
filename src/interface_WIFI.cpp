@@ -100,7 +100,7 @@ bool interface_WIFI_Check_Connexion()
 }
 
 
-int interface_WIFI_Read(char * packet, int length)
+int interface_WIFI_Read(unsigned char * packet, int length)
 {
     int len = UDP.read(packet, length);
     if (len > 0)
@@ -111,7 +111,7 @@ int interface_WIFI_Read(char * packet, int length)
 
     for(int i = 0; i < len; i++)
     {
-        Serial.print(packet[i]);
+        Serial.print((char)packet[i]);
     }
     Serial.println("");
 

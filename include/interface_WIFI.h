@@ -36,7 +36,7 @@ int interface_WIFI_initialise();
 int interface_WIFI_Connexion();
 bool interface_WIFI_Check_Connexion();
 int interface_WIFI_Data_Available();
-int interface_WIFI_Read(char * packet, int length);
+int interface_WIFI_Read(unsigned char * packet, int length);
 int interface_WIFI_Send(unsigned char * packet, int length);
 void interface_WIFI_Show_Page();
 void interface_WIFI_eteint(void);

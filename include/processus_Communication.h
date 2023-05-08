@@ -4,7 +4,7 @@
 typedef struct
 {
     unsigned char State;
-    char tabReceived[255];
+    unsigned char tabReceived[255];
     int DataToRead;
     int DataToSend;
     int DataToSendSPI;
