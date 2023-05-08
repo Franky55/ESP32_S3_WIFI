@@ -6,6 +6,14 @@
 #include <WiFiUdp.h>
 #include "interface_WIFI.h"
 
+
+#define UDP_PORT 4210
+
+// UDP
+WiFiUDP UDP;
+char packet[255];
+char reply[] = "Packet received!";
+
 WiFiServer server(80);
 WiFiClient client;
 IPAddress myIP;
@@ -21,19 +29,22 @@ int interface_WIFI_initialise()
 {
     // You can remove the password parameter if you want the AP to be open.
   // a valid password must have more than 7 characters
+
   if (!WiFi.softAP(WIFI_SSID, WIFI_PASSWORD)) {
     log_e("Soft AP creation failed.");
     return -1;
   }
 
-
   myIP = WiFi.softAPIP();
 
   Serial.print("AP IP address: ");
   Serial.println(myIP);
-  server.begin();
 
-  Serial.println("Server started");
+  // Begin listening to UDP port
+  UDP.begin(UDP_PORT);
+  Serial.print("Listening on UDP port ");
+  Serial.println(UDP_PORT);
+
 
   return 0;
 }
@@ -47,29 +58,26 @@ int interface_WIFI_initialise()
  */
 int interface_WIFI_Connexion()
 {
-    client = server.available();   // listen for incoming clients
-
-    if (client) 
-    {
-        return 1;
-    }
-    //Serial.print("AP IP address: ");
-    //Serial.println(myIP);
-    return 0;
+    
+    return 1;
 }
 
 /**
- * @brief La fonction retourne true s'il y a du 
- * data a lire
+ * @brief La fonction retourne le nombre de data à lire
  * 
  * @return true 
  * @return false 
  */
-bool interface_WIFI_Data_Available()
+int interface_WIFI_Data_Available()
 {
-    return client.available();
+    return UDP.parsePacket();
 }
 
+
+
+
+
+  
 
 /**
  * @brief 
@@ -80,61 +88,45 @@ bool interface_WIFI_Data_Available()
  */
 bool interface_WIFI_Check_Connexion()
 {
-    if(client.connected())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return true;
+    // if(client.connected())
+    // {
+    //     return true;
+    // }
+    // else
+    // {
+    //     return false;
+    // }
 }
 
 
-unsigned char interface_WIFI_Read()
+int interface_WIFI_Read(char * packet, int length)
 {
-    int index = 0;
-    unsigned char val = 0;
-    while(client.available())
+    int len = UDP.read(packet, length);
+    if (len > 0)
     {
-        char c = client.read();
-
-        if(index == 0 && c == 'G')
-        {
-            index++;
-        }
-        else if(index == 1 && c == 'E')
-        {
-            index++;
-        }
-        else if(index == 2 && c == 'T')
-        {
-            index++;
-        }
-        else if(index == 3 && c == ' ')
-        {
-            index++;
-        }
-        else if(index == 4 && c == '/')
-        {
-            index++;
-        }
-        else if(index == 5 && c == '1')
-        {
-            val = '1';
-        }
-        else if(index == 5 && c == '0')
-        {
-            val = '0';
-        }
-        else
-        {
-            index = 0;
-        }
-        Serial.print(c);
+      packet[len] = '\0';
     }
+    Serial.print("Packet received: ");
 
-    return val;
+    for(int i = 0; i < len; i++)
+    {
+        Serial.print(packet[i]);
+    }
+    Serial.println("");
+
+    return len;
+}
+
+
+int interface_WIFI_Send(unsigned char * packet, int length)
+{
+        // Send return packet
+    UDP.beginPacket(UDP.remoteIP(), UDP.remotePort());
+    UDP.write(packet, length);
+    UDP.endPacket();
+
+    return 0;
 }
 
 

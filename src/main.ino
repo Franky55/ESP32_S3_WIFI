@@ -38,6 +38,7 @@
 #include "Interface_Accelerometre.h"
 #include "interface_PWM.h"
 #include "interface_WIFI.h"
+#include "interface_SPI.h"
 
 // Include des processus
 #include "processusClignotant.h"
@@ -76,6 +77,7 @@ void main_initialise(void)
   interface_Accelerometre_initialise();
   interface_PWM_Initialise();
   interface_WIFI_initialise();
+  interface_SPI_initialise();
 
   processusClignotant_initialise();
   Processus_Controle_initialise();

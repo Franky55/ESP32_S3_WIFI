@@ -4,8 +4,10 @@
 typedef struct
 {
     unsigned char State;
-    unsigned char DataRead;
-    unsigned char DataToSend;
+    char tabReceived[255];
+    int DataToRead;
+    int DataToSend;
+    int DataToSendSPI;
 }PROCESSUS_WIFI;
 
 
