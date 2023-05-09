@@ -26,6 +26,7 @@
 #include "pilote_NEOPIXEL.h"
 #include "Pilote_I2C.h"
 #include "pilote_PWM.h"
+//#include "pilote_SPI.h"
 
 
 // Include des Services

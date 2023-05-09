@@ -14,7 +14,6 @@
 #define CLK 12
 #define CS1 10
 
-SPISettings spiSettings(10000000, MSBFIRST, SPI_MODE0);
 SPIClass interfaceSPI(HSPI);
 
 
@@ -28,14 +27,14 @@ int interface_SPI_initialise()
     //interfaceSPI.setClockDivider(1);
     //interfaceSPI.setDataMode();
     //interfaceSPI.setBitOrder();
-    interfaceSPI.setFrequency(10000000);
+    // interfaceSPI.setFrequency(10000000);
     return 0;
 }
 
 
 int interface_SPI_Transaction(const unsigned char * data, unsigned char * out, unsigned long size)
 {
-    interfaceSPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0));
+    interfaceSPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
 
     digitalWrite(CS1, LOW);  // Select the slave device
   

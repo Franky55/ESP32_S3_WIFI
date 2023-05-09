@@ -77,7 +77,7 @@
 
 
 //Utlisation de la LED Neopixel
-#define NEOPIXEL  48
+#define NEOPIXEL  45
 #define NUMPIXELS 1 
 
 
