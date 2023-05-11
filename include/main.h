@@ -67,13 +67,13 @@
 /***  DÉFINITION POUR LES SERVOS MOTEURS  ***/
 
 //Les pins utilisés
-#define SERVO1 9
+#define SERVO1 39
 
 
 
 //Pin utilisé pour la communication I2C
-#define I2C_SDA 7
-#define I2C_SCL 8
+#define I2C_SDA 8
+#define I2C_SCL 7
 
 
 //Utlisation de la LED Neopixel

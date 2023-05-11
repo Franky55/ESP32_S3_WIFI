@@ -1,6 +1,6 @@
 /**
  * @file piloteIOT1.ino
- * @author CamFo Camille Fortin (camfortin2022@gmail.com)
+ * @author Francis Gratton
  * @brief Pilote qui contrôle la broche d'un microcontrôleur en utilisant
  *  la librairie Arduino. (digitalWrite et pinMode)
  * 

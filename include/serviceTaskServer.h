@@ -15,8 +15,7 @@
 //d'avoir recours aux fonctionnalites de RTOS.
 
 //HISTORIQUE:
-// 2021-04-16, Yves Roy, creation
-// 2022-04-11, Yves Roy, ajout a la description
+
 
 //DEFINITIONS REQUISES PAR LE MODULE:
 // ==== Uncomment desired compile options =================================
