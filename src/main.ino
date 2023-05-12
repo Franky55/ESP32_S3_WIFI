@@ -26,6 +26,7 @@
 #include "pilote_NEOPIXEL.h"
 #include "Pilote_I2C.h"
 #include "pilote_PWM.h"
+#include "pilote_GPIO.h"
 //#include "pilote_SPI.h"
 
 
@@ -40,6 +41,7 @@
 #include "interface_PWM.h"
 #include "interface_WIFI.h"
 #include "interface_SPI.h"
+#include "interface_GPIO.h"
 
 // Include des processus
 #include "processusClignotant.h"
@@ -72,6 +74,7 @@ void main_initialise(void)
   pilote_NEOPIXEL_initialise(); 
   pilote_I2C_Initialise();
   pilote_PWM_Initialise();
+  pilote_GPIO_Initialise();
 
   //interfaceEntree1_initialise();
   interface_NEOPIXEL_initialise();
@@ -79,6 +82,7 @@ void main_initialise(void)
   interface_PWM_Initialise();
   interface_WIFI_initialise();
   interface_SPI_initialise();
+  interface_GPIO_Initialise();
 
   processusClignotant_initialise();
   Processus_Controle_initialise();

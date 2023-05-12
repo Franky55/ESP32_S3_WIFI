@@ -33,7 +33,7 @@ void MoveServo()
 {
   compteurPWM++;
 
-  if (compteurPWM < 10)
+  if (compteurPWM < 5)
   {
     return;
   }

@@ -14,7 +14,7 @@ int interface_PWM_Initialise()
 
 void interface_Write_PWM(int position)
 {
-    write_PWM(SERVO1, position);
+    write_PWM(SERVO_AXE_X, position);
 }
 
 
