@@ -67,13 +67,25 @@
 /***  DÉFINITION POUR LES SERVOS MOTEURS  ***/
 
 //Les pins utilisés
-#define SERVO1 9
+#define SERVO1 39
+#define SERVO_AXE_X 17
 
 
 
 //Pin utilisé pour la communication I2C
-#define I2C_SDA 7
-#define I2C_SCL 8
+#define I2C_SDA 8
+#define I2C_SCL 7
+
+
+//#define MISO 7
+//#define MOSI 8
+//#define CLK 6
+//#define CS1 9
+
+#define SPI_MISO 13
+#define SPI_MOSI 11
+#define SPI_CLK 12
+#define SPI_CS1 10
 
 
 //Utlisation de la LED Neopixel
@@ -127,8 +139,8 @@
 #define PROCESSUS_WIFI_PHASE 3
 
 
-#define PROCESSUSCLIGNOTANT_TEMPS_ALLUME_EN_MS 500 
-#define PROCESSUSCLIGNOTANT_TEMPS_ETEINT_EN_MS 500
+#define PROCESSUSCLIGNOTANT_TEMPS_ALLUME_EN_MS 5000
+#define PROCESSUSCLIGNOTANT_TEMPS_ETEINT_EN_MS 5000
 
 
 #endif

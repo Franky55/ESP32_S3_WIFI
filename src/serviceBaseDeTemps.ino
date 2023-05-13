@@ -1,6 +1,6 @@
 /**
  * @file serviceBaseDeTemps.ino
- * @author CamFo Camille Fortin (camfortin2022@gmail.com)
+ * @author Francis Gratton
  * @brief  pour mettre en place un service d'appels periodiques de fonctions
  *  pointees par un tableau de pointeurs de fonctions. Le service met en place
  *  une base de temps qui reposent sur l'emploi des appels que peut faire le module

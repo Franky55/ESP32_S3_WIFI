@@ -5,6 +5,7 @@
 //INCLUSIONS
 #include "Arduino.h"
 #include "main.h"
+#include "interface_GPIO.h"
 #include "interface_NEOPIXEL.h"
 
 #include "serviceBaseDeTemps.h"
@@ -45,7 +46,9 @@ void processusClignotant_attendAvantDAllumerLeTemoinLumineux(void)
 
 
   // END test Code 
-  //interface_NEOPIXEL_allume(10, 10, 10);
+  interface_NEOPIXEL_allume(10, 10, 10);
+  interface_GPIO_Write(47, HIGH);
+  //digitalWrite(SPI_CS1, HIGH);
   Serial.println("ALLUME");
   processusClignotant_compteur = 0;
   serviceBaseDeTemps_execute[PROCESSUSCLIGNOTANT_PHASE] = processusClignotant_attendAvantDEteindreLeTemoinLumineux;
@@ -59,7 +62,8 @@ void processusClignotant_attendAvantDEteindreLeTemoinLumineux(void)
     return;
   }
 
-  //interface_NEOPIXEL_eteint();
+  interface_NEOPIXEL_eteint();
+  interface_GPIO_Write(47, LOW);
   Serial.println("ETEINT");
   processusClignotant_compteur = 0;
   serviceBaseDeTemps_execute[PROCESSUSCLIGNOTANT_PHASE] = processusClignotant_attendAvantDAllumerLeTemoinLumineux;

@@ -1,6 +1,6 @@
 /**
  * @file piloteEntree1.ino
- * @author CamFo Camille Fortin (camfortin2022@gmail.com)
+ * @author Francis Gratton
  * @brief Pilote qui permet la lecture d'une broche d'un microcontrôleur 
  * 
  * @version 0.1

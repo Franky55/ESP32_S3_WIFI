@@ -1,6 +1,6 @@
 /**
  * @file xpiloteEntree1.h
- * @author CamFo Camille Fortin (camfortin2022@gmail.com)
+ * @author Francis Gratton
  * @brief Pilote qui permettre la lecture d'une entree d'un microcontrôleur en utilisant la librairie Arduino
  * @version 0.1
  * @date 2022-11-15

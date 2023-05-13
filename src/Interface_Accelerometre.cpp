@@ -6,8 +6,7 @@
 #include "Interface_Accelerometre.h"
 
 
-#define I2C_SDA 7
-#define I2C_SCL 8
+
 #define ADDRESSE 0x68
 
 TwoWire I2C = TwoWire(0);

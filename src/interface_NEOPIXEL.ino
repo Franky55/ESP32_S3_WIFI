@@ -1,6 +1,6 @@
 /**
  * @file interfaceT1.ino
- * @author CamFo Camille Fortin (camfortin2022@gmail.com)
+ * @author Francis Gratton
  * @brief Interface qui contrôle la del su Board Adafruit ESP32 feather
  * @version 0.1
  * @date 2022-11-15
