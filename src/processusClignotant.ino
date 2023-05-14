@@ -7,8 +7,9 @@
 #include "main.h"
 #include "interface_GPIO.h"
 #include "interface_NEOPIXEL.h"
-
+#include "interface_SPI_Master.h"
 #include "serviceBaseDeTemps.h"
+
 #include "processusClignotant.h"
 #include <stdio.h>
 
@@ -43,16 +44,18 @@ void processus_GPIO10_RESET();
 void processusClignotant_attendAvantDAllumerLeTemoinLumineux(void)
 {
   processusClignotant_compteur++;
+  processusClignotant_compteur = 0;
   if (processusClignotant_compteur < PROCESSUSCLIGNOTANT_COMPTE_POUR_ALLUME)
   {
     return;
   }
   // Test Code Go here
 
-
+  unsigned char * tabTemp;
   // END test Code 
   interface_NEOPIXEL_allume(10, 10, 10);
   interface_GPIO_Write(47, HIGH);
+  //interface_SPI_MASTER_Transaction((unsigned char *)"Hello", tabTemp, 6);
   //digitalWrite(SPI_CS1, HIGH);
   Serial.println("ALLUME");
   processusClignotant_compteur = 0;
@@ -91,7 +94,8 @@ void processus_GPIO10_RESET()
   {
     return;
   }
-  digitalWrite(GPIO10, HIGH);
+  //digitalWrite(GPIO10, HIGH);
+  pinMode(SPI_CS1, INPUT);
   processusClignotant_compteur = 0;
   serviceBaseDeTemps_execute[PROCESSUSCLIGNOTANT_PHASE] = processusClignotant_attendAvantDAllumerLeTemoinLumineux;
 }
