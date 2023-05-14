@@ -56,7 +56,8 @@
 
 
 
-
+#define GPIO10 10
+#define GPIO10_TEMPS_POUR_RESET_EN_MS 5000
 
 
 

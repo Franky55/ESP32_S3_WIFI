@@ -20,6 +20,10 @@
 #define PROCESSUSCLIGNOTANT_COMPTE_POUR_ETEINDRE  (\
   PROCESSUSCLIGNOTANT_TEMPS_ETEINT_EN_MS * SERVICEBASEDETEMPS_FREQUENCE_EN_HZ \
   /1000.0)
+
+#define PROCESSUSGPIO10_COMPTE  (\
+  GPIO10_TEMPS_POUR_RESET_EN_MS * SERVICEBASEDETEMPS_FREQUENCE_EN_HZ \
+  /1000.0)
    
 //Declarations de fonctions privees:
 //pas de fonction privees
@@ -30,6 +34,7 @@ unsigned long processusClignotant_compteur;
 //Definitions de fonctions privees:
 void processusClignotant_attendAvantDAllumerLeTemoinLumineux(void);
 void processusClignotant_attendAvantDEteindreLeTemoinLumineux(void);
+void processus_GPIO10_RESET();
 
 //Definitions de variables publiques:
 //pas de variables publiques
@@ -72,6 +77,21 @@ void processusClignotant_attendAvantDEteindreLeTemoinLumineux(void)
 void processusClignotant_initialise(void)
 {
   processusClignotant_compteur = 0;
-  interface_NEOPIXEL_eteint();
+  //interface_NEOPIXEL_eteint();
+  serviceBaseDeTemps_execute[PROCESSUSCLIGNOTANT_PHASE] = processus_GPIO10_RESET;
+}
+
+
+
+void processus_GPIO10_RESET()
+{
+  processusClignotant_compteur++;
+  digitalWrite(GPIO10, LOW);
+  if (processusClignotant_compteur < PROCESSUSGPIO10_COMPTE)
+  {
+    return;
+  }
+  digitalWrite(GPIO10, HIGH);
+  processusClignotant_compteur = 0;
   serviceBaseDeTemps_execute[PROCESSUSCLIGNOTANT_PHASE] = processusClignotant_attendAvantDAllumerLeTemoinLumineux;
 }
