@@ -5,7 +5,7 @@
 //#include "BFIO"
 #include <stdio.h>
 #include "interface_WIFI.h"
-#include "interface_SPI.h"
+#include "interface_SPI_Master.h"
 #include "Processus_Communication.h"
 
 // if udp:         https://gist.github.com/santolucito/70ecb94ce297eb1b8b8034f78683447b
@@ -148,7 +148,7 @@ void Processus_Communication_SPI()
     }
     Serial.println("");
     //interface_SPI_Transaction((const unsigned char*)"dat", (unsigned char*)processus_WIFI.tabReceived, 3);
-    interface_SPI_Transaction((const unsigned char*)processus_WIFI.tabReceived, (unsigned char*)data, processus_WIFI.DataToSendSPI);
+    interface_SPI_MASTER_Transaction((unsigned char*)processus_WIFI.tabReceived, (unsigned char*)data, processus_WIFI.DataToSendSPI);
 
     serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Check_State;
 }
