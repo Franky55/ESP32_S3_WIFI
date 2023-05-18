@@ -84,7 +84,7 @@ void main_initialise(void)
   interface_SPI_initialise();
   interface_GPIO_Initialise();
 
-  processusClignotant_initialise();
+  //processusClignotant_initialise();
   Processus_Controle_initialise();
   Processus_Communication_initialise();
 }

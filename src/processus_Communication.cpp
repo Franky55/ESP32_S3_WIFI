@@ -102,19 +102,22 @@ void Processus_Communication_Read()
     }
     Serial.println("");
 
-    if(processus_WIFI.tabReceived[1] == 'N')
+    if(length > 12)
+    {
+    if(processus_WIFI.tabReceived[11] == '1')
     {
         interface_NEOPIXEL_allume(10,10,10);
         //interface_WIFI_eteint();
     }
-    if(processus_WIFI.tabReceived[1] == 'F')
+    if(processus_WIFI.tabReceived[11] == '0')
     {
         interface_NEOPIXEL_eteint();
         //interface_WIFI_eteint();
     }
+    }
     //interface_WIFI_eteint();
     processus_WIFI.DataToRead = 0;//data has been read
-    serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_SPI;
+    serviceBaseDeTemps_execute[PROCESSUS_WIFI_PHASE] = Processus_Communication_Check_State;
 
 }
 
