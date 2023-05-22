@@ -29,7 +29,7 @@ int interface_WIFI_initialise()
 {
     // You can remove the password parameter if you want the AP to be open.
   // a valid password must have more than 7 characters
-
+    
   if (!WiFi.softAP(WIFI_SSID, WIFI_PASSWORD)) {
     log_e("Soft AP creation failed.");
     return -1;

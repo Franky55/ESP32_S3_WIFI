@@ -82,7 +82,7 @@ void main_initialise(void)
   interface_Accelerometre_initialise();
   interface_PWM_Initialise();
   interface_WIFI_initialise();
-  interface_SPI_MASTER_initialise();
+  //interface_SPI_MASTER_initialise();
   interface_GPIO_Initialise();
 
   //processusClignotant_initialise();
